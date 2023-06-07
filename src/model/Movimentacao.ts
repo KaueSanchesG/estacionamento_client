@@ -15,4 +15,10 @@ export class Movimentacao extends AbstractEntity{
     valorMulta! : number
     valorTotal! : number
     valorMinutoMulta! : number
+
+    constructor(){
+        super()
+        this.veiculo = new Veiculo
+        this.condutor = new Condutor
+    }
 }

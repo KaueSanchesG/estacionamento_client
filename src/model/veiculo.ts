@@ -1,12 +1,17 @@
 import { AbstractEntity } from "./abstract-entity";
 import { Modelo } from "./modelo";
-import { Cor } from "./cor"
-import { Tipo } from "./tipo";
+import { Cor } from "./Enums/cor"
+import { Tipo } from "./Enums/tipo";
 
 export class Veiculo extends AbstractEntity{
     placa! : string
     modelo! : Modelo
-    cor! : typeof Cor 
-    tipo! : typeof Tipo
+    cor! : Cor
+    tipo! : Tipo
     ano! : number
+
+    constructor(){
+        super()
+        this.modelo = new Modelo
+    }
 }
