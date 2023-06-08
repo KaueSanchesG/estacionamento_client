@@ -1,7 +1,8 @@
 import { Condutor } from "@/model/condutor";
+import { Configuracao } from "@/model/configuracao";
 import axios ,{ AxiosInstance } from "axios";
 
-export class CondutorClient{
+export class ConfiguracaoClient{
 
     private axiosClient: AxiosInstance
 
@@ -13,33 +14,33 @@ export class CondutorClient{
             }
         });
     }
-    public async findById(id:number): Promise<Condutor>{
+    public async findById(id:number): Promise<Configuracao>{
         try{
-            return(await this.axiosClient.get<Condutor>(`/${id}`)).data
+            return(await this.axiosClient.get<Configuracao>(`/${id}`)).data
         } 
         catch(error: any){
             return Promise.reject(error.response)
         }
     }
-    public async cadastrar(condutor:Condutor): Promise<void>{
+    public async cadastrar(configuracao:Configuracao): Promise<void>{
         try{
-            return (await this.axiosClient.post('/', condutor))
+            return (await this.axiosClient.post('/', configuracao))
         }
         catch(error:any){
             return Promise.reject(error.response)
         }
     }
-    public async editar(condutor:Condutor): Promise<void>{
+    public async editar(configuracao:Configuracao): Promise<void>{
         try{
-            return (await this.axiosClient.put(`/${condutor.id}`, condutor)).data
+            return (await this.axiosClient.put(`/${configuracao.id}`, configuracao)).data
         }
         catch(error:any){
             return Promise.reject(error.response)
         }
     }
-    public async excluir(condutor:Condutor): Promise<void>{
+    public async excluir(configuracao:Configuracao): Promise<void>{
         try{
-            return(await this.axiosClient.put(`/desativar/${condutor.id}`, condutor)).data
+            return(await this.axiosClient.put(`/desativar/${configuracao.id}`, configuracao)).data
         }
         catch(error:any){
             return Promise.reject(error.response)
