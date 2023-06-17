@@ -33,10 +33,9 @@ export class VeiculoClient {
       return Promise.reject(error.response);
     }
   }
-  public async excluir(veiculo: Veiculo): Promise<void> {
+  public async delete(id: number): Promise<string> {
     try {
-      return (await this.axiosClient.put(`/desativar/${veiculo.id}`, veiculo))
-        .data;
+      return (await this.axiosClient.delete<string>(`/${id}`)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }

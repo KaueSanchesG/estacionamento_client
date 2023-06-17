@@ -34,14 +34,9 @@ export class MovimentacaoClient {
       return Promise.reject(error.response);
     }
   }
-  public async excluir(movimentacao: Movimentacao): Promise<void> {
+  public async delete(id: number): Promise<string> {
     try {
-      return (
-        await this.axiosClient.put(
-          `/desativar/${movimentacao.id}`,
-          movimentacao
-        )
-      ).data;
+      return (await this.axiosClient.delete<string>(`/${id}`)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
