@@ -4,10 +4,12 @@
 
 <script lang="ts">
 import HomeView from './views/HomeView.vue'
+import Footer from './components/Footer.vue';
 export default {
   name: 'App',
   components: {
-    HomeView
+    HomeView,
+    Footer,
   }
 }
 </script>

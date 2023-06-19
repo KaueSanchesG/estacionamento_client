@@ -18,10 +18,9 @@ export default {
   position: relative;
   width: 100%;
   min-height: 5vw;
-  //height: 5vw;
   display: flex;
   justify-content: center;
-  background: rgba(67, 56, 98, 0.4);
+  background: rgba(67, 56, 98, 0.5);
 }
 
 #icon {
@@ -41,9 +40,13 @@ img:hover {
 }
 
 .titulo {
+  text-transform: uppercase;
   font-family: "Merriweather", sans-serif;
-  font-weight: 400;
-  font-size: 2vw;
+  font-weight: 500;
+  font-size: 1.7vw;
   text-align: center;
+  color: white;
+  display: flex;
+  align-items: center;
 }
 </style>
