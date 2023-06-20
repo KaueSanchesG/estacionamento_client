@@ -3,6 +3,7 @@
     <div class="img_background"></div>
     <Header />
     <SelectModel />
+    <Table />
     <Footer />
   </div>
 </template>
@@ -10,7 +11,8 @@
 <script lang="ts">
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
-import SelectModel from '@/components/SelectModel.vue';
+import SelectModel from '../components/SelectModel.vue';
+import Table from '../components/Table.vue';
 
 export default {
   name: 'HomeView',
@@ -18,6 +20,7 @@ export default {
     Header,
     Footer,
     SelectModel,
+    Table,
   }
 }
 </script>

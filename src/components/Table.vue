@@ -3,12 +3,14 @@
         <div class="table-wrapper">
             <table>
                 <thead>
-                    <th>ID</th>
+                    <th class="id">ID</th>
                     <th>Condutor</th>
                     <th>Placa</th>
                     <th>Entrada</th>
                     <th>Saída</th>
-                    <th><img class="setting" src="../assets/Configuracao.png" alt="Uma engrenagem de configuração"></th>
+                    <th class="component">
+                        <Setting />
+                    </th>
                 </thead>
                 <tbody>
                     <tr>
@@ -188,17 +190,22 @@
   
 <script lang="ts">
 import { defineComponent } from "vue";
+import Setting from "./Setting.vue";
 
 export default defineComponent({
+    name: "Table",
+    components: {
+        Setting,
+    },
     data() {
         return {
             items: [
-                { id: 1, nome: 'Item 1', placa: 'ABC-1234', entrada: '09:00', saida: '17:00' },
-                { id: 2, nome: 'Item 2', placa: 'DEF-5678', entrada: '10:30', saida: '18:30' },
-                { id: 3, nome: 'Item 3', placa: 'GHI-9012', entrada: '08:45', saida: '16:45' },
-                { id: 4, nome: 'Item 4', placa: 'BBC-1334', entrada: '11:00', saida: '17:30' },
-                { id: 5, nome: 'Item 5', placa: 'DDF-5978', entrada: '12:30', saida: '20:30' },
-                { id: 6, nome: 'Item 6', placa: 'GLI-9112', entrada: '13:45', saida: '17:45' },
+                { id: 1, nome: "Item 1", placa: "ABC-1234", entrada: "09:00", saida: "17:00" },
+                { id: 2, nome: "Item 2", placa: "DEF-5678", entrada: "10:30", saida: "18:30" },
+                { id: 3, nome: "Item 3", placa: "GHI-9012", entrada: "08:45", saida: "16:45" },
+                { id: 4, nome: "Item 4", placa: "BBC-1334", entrada: "11:00", saida: "17:30" },
+                { id: 5, nome: "Item 5", placa: "DDF-5978", entrada: "12:30", saida: "20:30" },
+                { id: 6, nome: "Item 6", placa: "GLI-9112", entrada: "13:45", saida: "17:45" },
             ]
         };
     },
@@ -234,14 +241,6 @@ table {
     border-spacing: 0px;
     z-index: 2;
     width: 100%;
-
-    img.setting {
-        width: 1.7vw;
-        height: 1.7vw;
-        position: absolute;
-        top: 0.5vw;
-        right: 0.5vw;
-    }
 }
 
 table th {
@@ -251,7 +250,13 @@ table th {
     color: rgb(241, 245, 179);
     text-align: center;
     font-weight: normal;
-    font-size: 18px;
+    font-size: 1.2vw;
+    // border-top: 1px solid rgb(177, 177, 177);
+}
+
+.id {
+    border-left: 1px solid rgb(177, 177, 177);
+    ;
 }
 
 table th,
@@ -269,6 +274,10 @@ table td {
     color: black;
     background-color: rgba(255, 255, 255, 0.818);
 
+}
+
+.component {
+    color: black;
 }
 
 ::-webkit-scrollbar {

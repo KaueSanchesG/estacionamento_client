@@ -3,16 +3,14 @@
         <div class="img_background_recibo"></div>
         <Header />
         <SelectModel />
-        <Form />
         <Footer />
     </div>
 </template>
 
 <script lang="ts">
-import Header from '@/components/Header.vue'
-import Footer from '@/components/Footer.vue'
-import SelectModel from '@/components/SelectModel.vue';
-import Form from '@/components/Form.vue';
+import Header from '../components/Header.vue'
+import Footer from '../components/Footer.vue'
+import SelectModel from '../components/SelectModel.vue';
 
 export default {
     name: 'reciboview',
@@ -20,7 +18,6 @@ export default {
         Header,
         Footer,
         SelectModel,
-        Form,
     }
 }
 </script>
