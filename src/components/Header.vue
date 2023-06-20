@@ -27,8 +27,8 @@ export default {
   position: absolute;
   top: 1vw;
   left: 1.8vw;
-  width: 3vw;
-  height: 3vw;
+  width: 2.7vw;
+  height: 2.7vw;
   display: flex;
   text-align: center;
   cursor: pointer;
@@ -43,7 +43,7 @@ img:hover {
   text-transform: uppercase;
   font-family: "Merriweather", sans-serif;
   font-weight: 500;
-  font-size: 1.7vw;
+  font-size: 1.5vw;
   text-align: center;
   color: white;
   display: flex;

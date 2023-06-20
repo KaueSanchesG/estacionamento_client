@@ -3,6 +3,7 @@
         <div class="img_background_recibo"></div>
         <Header />
         <SelectModel />
+        <Form />
         <Footer />
     </div>
 </template>
@@ -11,13 +12,15 @@
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
 import SelectModel from '@/components/SelectModel.vue';
+import Form from '@/components/Form.vue';
 
 export default {
     name: 'reciboview',
     components: {
         Header,
         Footer,
-        SelectModel
+        SelectModel,
+        Form,
     }
 }
 </script>
@@ -38,5 +41,6 @@ export default {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    z-index: -1;
 }
 </style>

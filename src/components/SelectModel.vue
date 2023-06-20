@@ -47,6 +47,10 @@ export default defineComponent({
 </script>
   
 <style lang="scss">
+* {
+    font-size: 1.1vw;
+}
+
 .container {
     display: flex;
     margin: auto;
@@ -64,9 +68,9 @@ export default defineComponent({
     display: flex;
     align-items: center;
     cursor: pointer;
-    border: 0.2vw solid white;
+    border: 0.2vw solid rgb(255, 255, 255);
     border-radius: 0.8vw;
-    padding: 0.7vw;
+    padding: 0.7vw 0.5vw;
     background-color: transparent;
 }
 
@@ -77,12 +81,13 @@ export default defineComponent({
     color: white;
     outline: none;
     cursor: pointer;
+    text-align: center;
+    padding: 0;
 }
 
 .select-input .arrow {
     width: 0;
     height: 0;
-    margin-left: 0.5vw;
     border-top: 0.5vw solid white;
     border-right: 0.5vw solid transparent;
     border-left: 0.5vw solid transparent;
@@ -91,6 +96,10 @@ export default defineComponent({
 .custom-select.active .select-input {
     border-color: white;
     background-color: transparent;
+
+    .arrow {
+        rotate: 180deg;
+    }
 }
 
 .options {
@@ -102,20 +111,26 @@ export default defineComponent({
     padding: 0;
     list-style: none;
     background-color: transparent;
-    border: 0.2vw solid white;
+    border: 0.2vw solid rgba(255, 255, 255);
     border-radius: 0.8vw;
     color: white;
     overflow: hidden;
+    z-index: 4;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
 .options li {
-    padding: 0.5vw;
+    padding: 0.2vw;
     cursor: pointer;
     outline: none;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .options li:hover {
-    background-color: gray;
+    background-color: rgba(211, 211, 211, 0.785);
+    color: black;
 }
 
 .options li.active {
