@@ -40,7 +40,7 @@ export default defineComponent({
         selectOption(option: any) {
             this.selectedOption = option.label;
             this.isActive = false;
-            router.push(option.route); // Use o roteador para redirecionar para a rota selecionada
+            router.push(option.route);
         },
     },
     mounted() {

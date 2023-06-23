@@ -19,7 +19,7 @@ import MovimentacaoClient from "../client/movimentacao.client";
 import { defineComponent } from "vue";
 
 export default defineComponent({
-    name: 'MovimentacaoListaView',
+    name: 'MovimentacaoView',
     components: {
         Header,
         Select,
