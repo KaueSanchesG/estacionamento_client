@@ -19,6 +19,13 @@ export class VeiculoClient {
       return Promise.reject(error.response);
     }
   }
+  public async listaAll(): Promise<VeiculoModel[]> {
+    try {
+      return (await this.axiosClient.get<VeiculoModel[]>(`/lista`)).data;
+    } catch (error: any) {
+      return Promise.reject(error.response);
+    }
+  }
   public async cadastrar(veiculo: VeiculoModel): Promise<void> {
     try {
       return await this.axiosClient.post("/", veiculo);
@@ -41,3 +48,4 @@ export class VeiculoClient {
     }
   }
 }
+export default new VeiculoClient();

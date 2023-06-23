@@ -19,6 +19,13 @@ export class ConfiguracaoClient {
       return Promise.reject(error.response);
     }
   }
+  public async listaAll(): Promise<ConfiguracaoModel[]> {
+    try {
+      return (await this.axiosClient.get<ConfiguracaoModel[]>(`/lista`)).data;
+    } catch (error: any) {
+      return Promise.reject(error.response);
+    }
+  }
   public async cadastrar(configuracao: ConfiguracaoModel): Promise<void> {
     try {
       return await this.axiosClient.post("/", configuracao);
@@ -42,3 +49,4 @@ export class ConfiguracaoClient {
     }
   }
 }
+export default new ConfiguracaoClient();

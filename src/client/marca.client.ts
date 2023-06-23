@@ -19,6 +19,13 @@ export class MarcaClient {
       return Promise.reject(error.response);
     }
   }
+  public async listaAll(): Promise<MarcaModel[]> {
+    try {
+      return (await this.axiosClient.get<MarcaModel[]>(`/lista`)).data;
+    } catch (error: any) {
+      return Promise.reject(error.response);
+    }
+  }
   public async cadastrar(marca: MarcaModel): Promise<void> {
     try {
       return await this.axiosClient.post("/", marca);
@@ -41,3 +48,4 @@ export class MarcaClient {
     }
   }
 }
+export default new MarcaClient();

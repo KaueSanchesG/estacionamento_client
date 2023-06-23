@@ -46,19 +46,35 @@ export default defineComponent({
         getCellClass(field: string): string {
             if (field === "id" || field === "ativo") {
                 return "centered-cell";
-            } else if (field === "condutor" || field === "placa") {
+            } else if (field === "condutor.nome" || field === "veiculo.placa") {
                 return "left-aligned-cell";
             } else {
-                return "right-aligned-cell";
+                const value = this.getFormattedValue(this.items[0], field);
+                if (typeof value === "string" && /[a-zA-Z]/.test(value)) {
+                    return "left-aligned-cell";
+                } else {
+                    return "right-aligned-cell";
+                }
             }
         },
         getFormattedValue(item: any, field: string): string {
-            if (field === "saida" && item.saida === null) {
+            const fieldPath = field.split(".");
+            let value = item;
+
+            for (const key of fieldPath) {
+                value = value[key];
+
+                if (value === undefined) {
+                    return "";
+                }
+            }
+
+            if (field === "saida" && value === null) {
                 return "Em aberto";
             } else if (field === "ativo") {
-                return item.ativo ? "Ativo" : "Desativo";
+                return value ? "Ativo" : "Desativo";
             } else {
-                return String(item[field]);
+                return String(value);
             }
         },
     },

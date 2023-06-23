@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <div class="img_background" :style="{ backgroundImage: `url(${backgroundImage})` }"></div>
+        <div class="img_background"></div>
         <Header />
         <Select />
         <Table :items="movimentacaoList" :columns="tableColumns" />
@@ -33,11 +33,12 @@ export default defineComponent({
                 { label: 'ID', field: 'id' },
                 { label: 'Ativo', field: 'ativo' },
                 { label: 'Condutor', field: 'condutor.nome' },
-                { label: 'Placa', field: 'veiculo["placa"]' },
+                { label: 'Placa', field: 'veiculo.placa' },
                 { label: 'Entrada', field: 'entrada' },
                 { label: 'Saída', field: 'saida' }
-            ],
-            backgroundImage: require("../assets/EstacionamentoHome.jpg"),
+            ]
+
+
         };
     },
     mounted() {
@@ -71,7 +72,7 @@ export default defineComponent({
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: linear-gradient(0deg, rgba(0, 0, 0, 0.8), rgba(121, 121, 121, 0.1));
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.8), rgba(121, 121, 121, 0.1)), url(../assets/EstacionamentoHome.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
