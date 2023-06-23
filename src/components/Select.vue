@@ -16,17 +16,19 @@
   
 <script lang="ts">
 import { defineComponent } from 'vue';
+import router from '../router';
 
 export default defineComponent({
+    name: 'Select',
     data() {
         return {
             selectedOption: null as string | null,
             options: [
-                { label: 'Movimentação', value: 'option1' },
-                { label: 'Condutor', value: 'option2' },
-                { label: 'Veículo', value: 'option3' },
-                { label: 'Modelo', value: 'option4' },
-                { label: 'Marca', value: 'option5' },
+                { label: 'Movimentação', value: 'option1', route: '/movimentacao/lista' },
+                { label: 'Condutor', value: 'option2', route: '/condutor/lista' },
+                { label: 'Veículo', value: 'option3', route: '/veiculo/lista' },
+                { label: 'Modelo', value: 'option4', route: '/modelo/lista' },
+                { label: 'Marca', value: 'option5', route: '/marca/lista' },
             ],
             isActive: false,
         };
@@ -38,12 +40,14 @@ export default defineComponent({
         selectOption(option: any) {
             this.selectedOption = option.label;
             this.isActive = false;
+            router.push(option.route); // Use o roteador para redirecionar para a rota selecionada
         },
     },
     mounted() {
         this.selectedOption = this.options[0].label;
-    }
+    },
 });
+
 </script>
   
 <style lang="scss">
@@ -55,7 +59,7 @@ export default defineComponent({
     display: flex;
     margin: auto;
     justify-content: center;
-    margin-top: 2.8vw;
+    margin-top: 1vw;
 }
 
 .custom-select {

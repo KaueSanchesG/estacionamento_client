@@ -1,32 +1,43 @@
 import axios, { AxiosInstance } from "axios";
-import { Movimentacao } from "./../model/movimentacao";
+import { MovimentacaoModel } from "../model/MovimentacaoModel";
 
-export class MovimentacaoClient {
+class MovimentacaoClient {
   private axiosClient: AxiosInstance;
 
   constructor() {
     this.axiosClient = axios.create({
-      baseURL: "http://localhost:8080/api/condutor",
+      baseURL: "http://localhost:8080/api/movimentacao",
       headers: {
         "Content-Type": "application/json",
       },
     });
   }
-  public async findById(id: number): Promise<Movimentacao> {
+
+  public async findById(id: number): Promise<MovimentacaoModel> {
     try {
-      return (await this.axiosClient.get<Movimentacao>(`/${id}`)).data;
+      return (await this.axiosClient.get<MovimentacaoModel>(`/${id}`)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
   }
-  public async cadastrar(movimentacao: Movimentacao): Promise<void> {
+
+  public async listaAll(): Promise<MovimentacaoModel[]> {
+    try {
+      return (await this.axiosClient.get<MovimentacaoModel[]>(`/lista`)).data;
+    } catch (error: any) {
+      return Promise.reject(error.response);
+    }
+  }
+
+  public async cadastrar(movimentacao: MovimentacaoModel): Promise<void> {
     try {
       return await this.axiosClient.post("/", movimentacao);
     } catch (error: any) {
       return Promise.reject(error.response);
     }
   }
-  public async editar(movimentacao: Movimentacao): Promise<void> {
+
+  public async editar(movimentacao: MovimentacaoModel): Promise<void> {
     try {
       return (await this.axiosClient.put(`/${movimentacao.id}`, movimentacao))
         .data;
@@ -34,6 +45,7 @@ export class MovimentacaoClient {
       return Promise.reject(error.response);
     }
   }
+
   public async delete(id: number): Promise<string> {
     try {
       return (await this.axiosClient.delete<string>(`/${id}`)).data;
@@ -42,3 +54,5 @@ export class MovimentacaoClient {
     }
   }
 }
+
+export default new MovimentacaoClient();

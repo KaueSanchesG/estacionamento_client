@@ -1,0 +1,3 @@
+<template>
+    Modelo-Lista
+</template>

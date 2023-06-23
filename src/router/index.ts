@@ -1,20 +1,46 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import HomeView from "../views/HomeView.vue";
 import ReciboView from "../views/ReciboView.vue";
+import MovimentacaoView from "../views/MovimentacaoView.vue";
+import CondutorListaView from "../views/Condutor/CondutorListaView.vue";
+import VeiculoListaView from "../views/Veiculo/VeiculoListaView.vue";
+import ModeloListaView from "../views/Modelo/ModeloListaView.vue";
+import MarcaListaView from "../views/Marca/MarcaListaView.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "home",
-    component: HomeView,
+    redirect: "/movimentacao/lista",
   },
   {
     path: "/recibo",
     name: "recibo",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: ReciboView,
+  },
+  {
+    path: "/movimentacao/lista",
+    name: "movimentacaolista",
+    component: MovimentacaoView,
+  },
+  {
+    path: "/condutor/lista",
+    name: "condutorlista",
+    component: CondutorListaView,
+  },
+  {
+    path: "/veiculo/lista",
+    name: "veiculolista",
+    component: VeiculoListaView,
+  },
+  {
+    path: "/modelo/lista",
+    name: "modelolista",
+    component: ModeloListaView,
+  },
+  {
+    path: "/marca/lista",
+    name: "marcalista",
+    component: MarcaListaView,
   },
 ];
 

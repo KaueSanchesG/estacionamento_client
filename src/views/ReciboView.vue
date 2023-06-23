@@ -2,22 +2,22 @@
     <div class="recibo">
         <div class="img_background_recibo"></div>
         <Header />
-        <SelectModel />
+        <Select />
         <Footer />
     </div>
 </template>
 
 <script lang="ts">
-import Header from '../components/Header.vue'
-import Footer from '../components/Footer.vue'
-import SelectModel from '../components/SelectModel.vue';
+import Header from '../components/Header.vue';
+import Select from '../components/Select.vue';
+import Footer from '../components/Footer.vue';
 
 export default {
     name: 'reciboview',
     components: {
         Header,
+        Select,
         Footer,
-        SelectModel,
     }
 }
 </script>

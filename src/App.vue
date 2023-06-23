@@ -3,14 +3,8 @@
 </template>
 
 <script lang="ts">
-import HomeView from './views/HomeView.vue'
-import Footer from './components/Footer.vue';
 export default {
   name: 'App',
-  components: {
-    HomeView,
-    Footer,
-  }
 }
 </script>
 <style lang="scss">
@@ -20,8 +14,6 @@ export default {
 * {
   box-sizing: border-box;
 }
-
-
 
 #app {
   font-family: 'Roboto', sans-serif;

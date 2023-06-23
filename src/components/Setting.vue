@@ -66,6 +66,8 @@ export default defineComponent({
     border-bottom: 1px black solid;
     font-size: 1.2vw;
     height: 6vh;
+    text-transform: lowercase;
+    // font-family: Alvenir;
 }
 
 .settings-list li:hover {

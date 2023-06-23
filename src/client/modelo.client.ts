@@ -1,4 +1,4 @@
-import { Modelo } from "@/model/modelo";
+import { ModeloModel } from "@/model/ModeloModel";
 import axios, { AxiosInstance } from "axios";
 
 export class ModeloClient {
@@ -6,27 +6,27 @@ export class ModeloClient {
 
   constructor() {
     this.axiosClient = axios.create({
-      baseURL: "http://localhost:8080/api/condutor",
+      baseURL: "http://localhost:8080/api/modelo",
       headers: {
         "Content-Type": "application/json",
       },
     });
   }
-  public async findById(id: number): Promise<Modelo> {
+  public async findById(id: number): Promise<ModeloModel> {
     try {
-      return (await this.axiosClient.get<Modelo>(`/${id}`)).data;
+      return (await this.axiosClient.get<ModeloModel>(`/${id}`)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
   }
-  public async cadastrar(modelo: Modelo): Promise<void> {
+  public async cadastrar(modelo: ModeloModel): Promise<void> {
     try {
       return await this.axiosClient.post("/", modelo);
     } catch (error: any) {
       return Promise.reject(error.response);
     }
   }
-  public async editar(modelo: Modelo): Promise<void> {
+  public async editar(modelo: ModeloModel): Promise<void> {
     try {
       return (await this.axiosClient.put(`/${modelo.id}`, modelo)).data;
     } catch (error: any) {

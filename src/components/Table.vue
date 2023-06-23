@@ -1,187 +1,26 @@
 <template>
     <div class="outer-wrapper">
+        <div style="display: flex; justify-content: end;">
+            <button type="button" class="btn btn-success" style="display: flex; align-items: end;">Cadastrar</button>
+        </div>
         <div class="table-wrapper">
             <table>
                 <thead>
-                    <th class="id">ID</th>
-                    <th>Condutor</th>
-                    <th>Placa</th>
-                    <th>Entrada</th>
-                    <th>Saída</th>
-                    <th class="component">
-                        <Setting />
-                    </th>
+                    <th v-for="column in columns" :key="column.field">{{ column.label }}</th>
+                    <th>Opções</th>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Value 1</td>
-                        <td>Value 2</td>
-                        <td>Value 3</td>
-                        <td>Value 4</td>
-                        <td>Value 5</td>
-                        <td>Value 6</td>
+                    <tr v-for="item in items" :key="item.id">
+                        <td v-for="column in columns" :key="column.field" :class="getCellClass(column.field)">
+                            {{ getFormattedValue(item, column.field) }}
+                        </td>
+                        <td>
+                            <div style="display: flex;gap: 0.3vw;">
+                                <button type="button" class="btn btn-danger">Excluir</button>
+                                <button type="button" class="btn btn-warning">Editar</button>
+                            </div>
+                        </td>
                     </tr>
-                    <tr>
-                        <td>Value 1</td>
-                        <td>Value 2</td>
-                        <td>Value 3</td>
-                        <td>Value 4</td>
-                        <td>Value 5</td>
-                        <td>Value 6</td>
-                    </tr>
-                    <tr>
-                        <td>Value 1</td>
-                        <td>Value 2</td>
-                        <td>Value 3</td>
-                        <td>Value 4</td>
-                        <td>Value 5</td>
-                        <td>Value 6</td>
-                    </tr>
-                    <tr>
-                        <td>Value 1</td>
-                        <td>Value 2</td>
-                        <td>Value 3</td>
-                        <td>Value 4</td>
-                        <td>Value 5</td>
-                        <td>Value 6</td>
-                    </tr>
-                    <tr>
-                        <td>Value 1</td>
-                        <td>Value 2</td>
-                        <td>Value 3</td>
-                        <td>Value 4</td>
-                        <td>Value 5</td>
-                        <td>Value 6</td>
-                    </tr>
-                    <tr>
-                        <td>Value 1</td>
-                        <td>Value 2</td>
-                        <td>Value 3</td>
-                        <td>Value 4</td>
-                        <td>Value 5</td>
-                        <td>Value 6</td>
-                    </tr>
-                    <tr>
-                        <td>Value 1</td>
-                        <td>Value 2</td>
-                        <td>Value 3</td>
-                        <td>Value 4</td>
-                        <td>Value 5</td>
-                        <td>Value 6</td>
-                    </tr>
-                    <tr>
-                        <td>Value 1</td>
-                        <td>Value 2</td>
-                        <td>Value 3</td>
-                        <td>Value 4</td>
-                        <td>Value 5</td>
-                        <td>Value 6</td>
-                    </tr>
-                    <tr>
-                        <td>Value 1</td>
-                        <td>Value 2</td>
-                        <td>Value 3</td>
-                        <td>Value 4</td>
-                        <td>Value 5</td>
-                        <td>Value 6</td>
-                    </tr>
-                    <tr>
-                        <td>Value 1</td>
-                        <td>Value 2</td>
-                        <td>Value 3</td>
-                        <td>Value 4</td>
-                        <td>Value 5</td>
-                        <td>Value 6</td>
-                    </tr>
-                    <tr>
-                        <td>Value 1</td>
-                        <td>Value 2</td>
-                        <td>Value 3</td>
-                        <td>Value 4</td>
-                        <td>Value 5</td>
-                        <td>Value 6</td>
-                    </tr>
-                    <tr>
-                        <td>Value 1</td>
-                        <td>Value 2</td>
-                        <td>Value 3</td>
-                        <td>Value 4</td>
-                        <td>Value 5</td>
-                        <td>Value 6</td>
-                    </tr>
-                    <tr>
-                        <td>Value 1</td>
-                        <td>Value 2</td>
-                        <td>Value 3</td>
-                        <td>Value 4</td>
-                        <td>Value 5</td>
-                        <td>Value 6</td>
-                    </tr>
-                    <tr>
-                        <td>Value 1</td>
-                        <td>Value 2</td>
-                        <td>Value 3</td>
-                        <td>Value 4</td>
-                        <td>Value 5</td>
-                        <td>Value 6</td>
-                    </tr>
-                    <tr>
-                        <td>Value 1</td>
-                        <td>Value 2</td>
-                        <td>Value 3</td>
-                        <td>Value 4</td>
-                        <td>Value 5</td>
-                        <td>Value 6</td>
-                    </tr>
-                    <tr>
-                        <td>Value 1</td>
-                        <td>Value 2</td>
-                        <td>Value 3</td>
-                        <td>Value 4</td>
-                        <td>Value 5</td>
-                        <td>Value 6</td>
-                    </tr>
-                    <tr>
-                        <td>Value 1</td>
-                        <td>Value 2</td>
-                        <td>Value 3</td>
-                        <td>Value 4</td>
-                        <td>Value 5</td>
-                        <td>Value 6</td>
-                    </tr>
-                    <tr>
-                        <td>Value 1</td>
-                        <td>Value 2</td>
-                        <td>Value 3</td>
-                        <td>Value 4</td>
-                        <td>Value 5</td>
-                        <td>Value 6</td>
-                    </tr>
-                    <tr>
-                        <td>Value 1</td>
-                        <td>Value 2</td>
-                        <td>Value 3</td>
-                        <td>Value 4</td>
-                        <td>Value 5</td>
-                        <td>Value 6</td>
-                    </tr>
-                    <tr>
-                        <td>Value 1</td>
-                        <td>Value 2</td>
-                        <td>Value 3</td>
-                        <td>Value 4</td>
-                        <td>Value 5</td>
-                        <td>Value 6</td>
-                    </tr>
-                    <tr>
-                        <td>Value 1</td>
-                        <td>Value 2</td>
-                        <td>Value 3</td>
-                        <td>Value 4</td>
-                        <td>Value 5</td>
-                        <td>Value 6</td>
-                    </tr>
-
                 </tbody>
             </table>
         </div>
@@ -190,24 +29,38 @@
   
 <script lang="ts">
 import { defineComponent } from "vue";
-import Setting from "./Setting.vue";
 
 export default defineComponent({
     name: "Table",
-    components: {
-        Setting,
+    props: {
+        items: {
+            type: Array,
+            required: true,
+        },
+        columns: {
+            type: Array,
+            required: true,
+        },
     },
-    data() {
-        return {
-            items: [
-                { id: 1, nome: "Item 1", placa: "ABC-1234", entrada: "09:00", saida: "17:00" },
-                { id: 2, nome: "Item 2", placa: "DEF-5678", entrada: "10:30", saida: "18:30" },
-                { id: 3, nome: "Item 3", placa: "GHI-9012", entrada: "08:45", saida: "16:45" },
-                { id: 4, nome: "Item 4", placa: "BBC-1334", entrada: "11:00", saida: "17:30" },
-                { id: 5, nome: "Item 5", placa: "DDF-5978", entrada: "12:30", saida: "20:30" },
-                { id: 6, nome: "Item 6", placa: "GLI-9112", entrada: "13:45", saida: "17:45" },
-            ]
-        };
+    methods: {
+        getCellClass(field: string): string {
+            if (field === "id" || field === "ativo") {
+                return "centered-cell";
+            } else if (field === "condutor" || field === "placa") {
+                return "left-aligned-cell";
+            } else {
+                return "right-aligned-cell";
+            }
+        },
+        getFormattedValue(item: any, field: string): string {
+            if (field === "saida" && item.saida === null) {
+                return "Em aberto";
+            } else if (field === "ativo") {
+                return item.ativo ? "Ativo" : "Desativo";
+            } else {
+                return String(item[field]);
+            }
+        },
     },
 });
 </script>
@@ -216,31 +69,27 @@ export default defineComponent({
 .outer-wrapper {
     position: relative;
     margin: auto;
-
-    border: 1px solid black;
-    border-radius: 4px;
-    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.9);
     max-width: fit-content;
     max-height: fit-content;
-    margin-top: 1vw;
 }
 
 .table-wrapper {
-
     overflow-y: scroll;
     height: fit-content;
     max-height: 66.4vh;
     color: #92A3FF;
-    margin: 15px;
+    margin-top: 3px;
     width: 85vw;
 }
 
 table {
+    table-layout: fixed;
     min-width: max-content;
     border-collapse: separate;
     border-spacing: 0px;
     z-index: 2;
     width: 100%;
+    background-color: #92a2ff;
 }
 
 table th {
@@ -251,12 +100,6 @@ table th {
     text-align: center;
     font-weight: normal;
     font-size: 1.2vw;
-    // border-top: 1px solid rgb(177, 177, 177);
-}
-
-.id {
-    border-left: 1px solid rgb(177, 177, 177);
-    ;
 }
 
 table th,
@@ -268,16 +111,24 @@ table td {
 
 table td {
     text-align: left;
-    font-size: 15px;
-    border: 1px solid rgb(177, 177, 177);
-    padding-left: 20px;
+    font-size: 1.1vw;
+    border: 1px solid #92A3FF;
     color: black;
     background-color: rgba(255, 255, 255, 0.818);
-
 }
 
-.component {
-    color: black;
+// <------- Text-align -------> // 
+
+.centered-cell {
+    text-align: center;
+}
+
+.left-aligned-cell {
+    text-align: left;
+}
+
+.right-aligned-cell {
+    text-align: right;
 }
 
 ::-webkit-scrollbar {
