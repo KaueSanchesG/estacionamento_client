@@ -1,10 +1,17 @@
 <template>
-    <h1>Form-Movimentacao</h1>
+    <div class="img_background_form"></div>
+    <Header />
     <Form :fields="formFields" />
+    <Footer />
 </template>
 
 <script lang="ts">
 import Form from '@/components/Form.vue';
+import Header from '@/components/Header.vue';
+import Footer from '@/components/Footer.vue'
+import MovimentacaoClient from '@/client/movimentacao.client';
+import { MovimentacaoModel } from '@/model/MovimentacaoModel';
+
 import { defineComponent } from 'vue';
 
 export default defineComponent({
@@ -12,22 +19,17 @@ export default defineComponent({
     data() {
         return {
             formFields: [
-                { label: 'Campo de Texto', name: 'inputField', type: 'input', inputType: 'text' },
-                { label: 'Selecionar Opção', name: 'selectField', type: 'select', options: ['Opção 1', 'Opção 2', 'Opção 3'] },
-                { label: 'Selecionar Enum', name: 'enumSelectField', type: 'enumSelect', enumOptions: [{ value: 'Valor1', label: 'Opção 1' }, { value: 'Valor2', label: 'Opção 2' }, { value: 'Valor3', label: 'Opção 3' }] },
-                { label: 'Horário', name: 'timeField', type: 'time' },
-                { label: 'Email', name: 'emailField', type: 'email' },
-                { label: 'Email', name: 'emailField', type: 'email' },
-                { label: 'Email', name: 'emailField', type: 'email' },
-                { label: 'Email', name: 'emailField', type: 'email' },
-                { label: 'Email', name: 'emailField', type: 'email' },
-                { label: 'Email', name: 'emailField', type: 'email' },
-                { label: 'Email', name: 'emailField', type: 'email' },
+                { label: 'Condutor', name: 'selectField', type: 'select', options: ['Opção 1', 'Opção 2', 'Opção 3'] },
+                { label: 'Veiculo', name: 'selectField', type: 'select', options: ['Opção 1', 'Opção 2', 'Opção 3'] },
+                { label: 'Entrada', name: 'timeField', type: 'time' },
+                { label: 'Saída', name: 'timeField', type: 'time' },
             ]
         }
     },
     components: {
+        Header,
         Form,
-    }
+        Footer,
+    },
 })
 </script>
