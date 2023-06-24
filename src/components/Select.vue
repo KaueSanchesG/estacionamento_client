@@ -2,7 +2,7 @@
     <div class="container">
         <div class="custom-select" :class="{ active: isActive }">
             <div class="select-input" @click="toggleDropdown">
-                <input v-model="selectedOption" readonly>
+                <input v-model="selectedOptionText" readonly>
                 <div class="arrow"></div>
             </div>
             <ul v-show="isActive" class="options">
@@ -23,6 +23,7 @@ export default defineComponent({
     data() {
         return {
             selectedOption: null as string | null,
+            selectedOptionText: '',
             options: [
                 { label: 'Movimentação', value: 'option1', route: '/movimentacao/lista' },
                 { label: 'Condutor', value: 'option2', route: '/condutor/lista' },
@@ -38,16 +39,28 @@ export default defineComponent({
             this.isActive = !this.isActive;
         },
         selectOption(option: any) {
-            this.selectedOption = option.label;
+            this.selectedOption = option.route;
+            this.selectedOptionText = option.label;
             this.isActive = false;
             router.push(option.route);
         },
     },
     mounted() {
-        this.selectedOption = this.options[0].label;
+        const currentRoute = this.options.find(option => option.route === router.currentRoute.value.path);
+        if (currentRoute) {
+            this.selectedOption = currentRoute.route;
+            this.selectedOptionText = currentRoute.label;
+        }
+    },
+    beforeRouteUpdate(to, from, next) {
+        const currentRoute = this.options.find(option => option.route === to.path);
+        if (currentRoute) {
+            this.selectedOption = currentRoute.route;
+            this.selectedOptionText = currentRoute.label;
+        }
+        next();
     },
 });
-
 </script>
   
 <style lang="scss">
@@ -129,7 +142,7 @@ export default defineComponent({
     outline: none;
     text-align: center;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .options li:hover {

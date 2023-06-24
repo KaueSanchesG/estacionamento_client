@@ -1,7 +1,8 @@
 <template>
     <div class="outer-wrapper">
         <div style="display: flex; justify-content: end;">
-            <button type="button" class="btn btn-success" style="display: flex; align-items: end;">Cadastrar</button>
+            <router-link type="button" class="btn btn-success" style="display: flex; align-items: end;"
+                :to="getFormRoute()">Cadastrar</router-link>
         </div>
         <div class="table-wrapper">
             <table>
@@ -10,14 +11,14 @@
                     <th>Opções</th>
                 </thead>
                 <tbody>
-                    <tr v-for="item in items" :key="item.id">
+                    <tr v-for="item in reversedItems" :key="item.id">
                         <td v-for="column in columns" :key="column.field" :class="getCellClass(column.field)">
                             {{ getFormattedValue(item, column.field) }}
                         </td>
                         <td>
-                            <div style="display: flex;gap: 0.3vw;">
-                                <button type="button" class="btn btn-danger">Excluir</button>
+                            <div style="display: flex;gap: 0.3vw; justify-content: center;">
                                 <button type="button" class="btn btn-warning">Editar</button>
+                                <button type="button" class="btn btn-danger">Excluir</button>
                             </div>
                         </td>
                     </tr>
@@ -76,6 +77,17 @@ export default defineComponent({
             } else {
                 return String(value);
             }
+        },
+        getFormRoute() {
+            const currentRoute = this.$route.path;
+            const dynamicParam = currentRoute.split('/')[1];
+
+            return `/${dynamicParam}/formulario`;
+        },
+    },
+    computed: {
+        reversedItems(): Array<any> {
+            return this.items.slice().reverse();
         },
     },
 });

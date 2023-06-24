@@ -37,8 +37,6 @@ export default defineComponent({
                 { label: 'Entrada', field: 'entrada' },
                 { label: 'Saída', field: 'saida' }
             ]
-
-
         };
     },
     mounted() {
@@ -76,7 +74,6 @@ export default defineComponent({
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    z-index: -1;
 }
 </style>
   
