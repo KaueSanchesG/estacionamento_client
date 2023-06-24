@@ -16,7 +16,13 @@ export default defineComponent({
                 { label: 'Selecionar Opção', name: 'selectField', type: 'select', options: ['Opção 1', 'Opção 2', 'Opção 3'] },
                 { label: 'Selecionar Enum', name: 'enumSelectField', type: 'enumSelect', enumOptions: [{ value: 'Valor1', label: 'Opção 1' }, { value: 'Valor2', label: 'Opção 2' }, { value: 'Valor3', label: 'Opção 3' }] },
                 { label: 'Horário', name: 'timeField', type: 'time' },
-                { label: 'Email', name: 'emailField', type: 'email' }
+                { label: 'Email', name: 'emailField', type: 'email' },
+                { label: 'Email', name: 'emailField', type: 'email' },
+                { label: 'Email', name: 'emailField', type: 'email' },
+                { label: 'Email', name: 'emailField', type: 'email' },
+                { label: 'Email', name: 'emailField', type: 'email' },
+                { label: 'Email', name: 'emailField', type: 'email' },
+                { label: 'Email', name: 'emailField', type: 'email' },
             ]
         }
     },
