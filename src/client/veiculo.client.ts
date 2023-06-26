@@ -1,7 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 import { VeiculoModel } from "./../model/VeiculoModel";
-import { CorModel } from "@/model/Enums/CorModel";
-import { TipoModel } from "@/model/Enums/TipoModel";
 
 class VeiculoClient {
   private axiosClient: AxiosInstance;
@@ -10,14 +8,14 @@ class VeiculoClient {
     this.axiosClient = axios.create({
       baseURL: "http://localhost:8080/api/veiculo",
       headers: {
-        "Content-type": "application/json",
+        "Content-Type": "application/json",
       },
     });
   }
 
   public async findById(id: number): Promise<VeiculoModel> {
     try {
-      return (await this.axiosClient.get<VeiculoModel>(`?id=${id}`)).data;
+      return (await this.axiosClient.get<VeiculoModel>(`/${id}`)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
@@ -39,9 +37,9 @@ class VeiculoClient {
     }
   }
 
-  public async atualizar(veiculo: VeiculoModel): Promise<void> {
+  public async editar(id: number, marca: VeiculoModel): Promise<string> {
     try {
-      return (await this.axiosClient.put(`/${veiculo.id}`, veiculo)).data;
+      return (await this.axiosClient.put<string>(`/${id}`, marca)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }

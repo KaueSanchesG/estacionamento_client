@@ -40,14 +40,13 @@
         </form>
         <div class="botoes">
             <button type="button" class="btn btn-danger but" @click="voltar">Voltar</button>
-            <button type="button" class="btn btn-success but" @click="enviarCadastro">Enviar</button>
+            <button type="button" class="btn btn-success but" @click="enviarDados">Enviar</button>
         </div>
     </div>
     <Footer />
 </template>
   
 <script lang="ts">
-import Form from '@/components/Form.vue';
 import Header from '@/components/Header.vue';
 import Footer from '@/components/Footer.vue'
 import { defineComponent } from 'vue';
@@ -72,7 +71,6 @@ export default defineComponent({
     },
     components: {
         Header,
-        Form,
         Footer,
     },
     computed: {
@@ -99,15 +97,27 @@ export default defineComponent({
                     console.log(error);
                 })
         },
-        enviarCadastro() {
-            veiculoClient.cadastrar(this.lista)
-                .then((success) => {
-                    this.lista = new VeiculoModel();
-                    console.log(success);
-                    this.$router.go(-1);
-                }).catch((error) => {
-                    console.log(error);
-                })
+        enviarDados() {
+            console.log('ID:', this.lista.id);
+            console.log('Lista:', this.lista);
+            if (this.lista.id) {
+                veiculoClient.editar(this.lista.id, this.lista)
+                    .then(() => {
+                        this.$router.push({ name: 'veiculo-lista' });
+                    })
+                    .catch((error) => {
+                        console.log(error.data);
+                    });
+            } else {
+                veiculoClient.cadastrar(this.lista)
+                    .then((success) => {
+                        this.lista = new VeiculoModel();
+                        console.log(success);
+                        this.$router.go(-1);
+                    }).catch((error) => {
+                        console.log(error);
+                    })
+            }
         },
         getCor(): { value: CorModel; label: string }[] {
             const corKeys = Object.keys(CorModel) as (keyof typeof CorModel)[];
@@ -120,6 +130,19 @@ export default defineComponent({
             return corKeys
                 .filter(key => isNaN(Number(key)))
                 .map(key => ({ value: TipoModel[key], label: key }));
+        }
+    },
+    created() {
+        const id = Number(this.$route.params.id);
+
+        if (!isNaN(id)) {
+            veiculoClient.findById(id)
+                .then((e) => {
+                    this.lista = e;
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         }
     }
 })

@@ -15,7 +15,7 @@ class MovimentacaoClient {
 
   public async findById(id: number): Promise<MovimentacaoModel> {
     try {
-      return (await this.axiosClient.get<MovimentacaoModel>(`?id=${id}`)).data;
+      return (await this.axiosClient.get<MovimentacaoModel>(`/${id}`)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
@@ -37,10 +37,9 @@ class MovimentacaoClient {
     }
   }
 
-  public async atualizar(movimentacao: MovimentacaoModel): Promise<void> {
+  public async editar(id: number, marca: MovimentacaoModel): Promise<string> {
     try {
-      return (await this.axiosClient.put(`/${movimentacao.id}`, movimentacao))
-        .data;
+      return (await this.axiosClient.put<string>(`/${id}`, marca)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }

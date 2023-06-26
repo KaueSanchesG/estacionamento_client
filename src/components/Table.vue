@@ -17,8 +17,8 @@
                         </td>
                         <td>
                             <div style="display: flex;gap: 0.3vw; justify-content: center;">
-                                <button type="button" class="btn btn-warning">Editar</button>
-                                <button type="button" class="btn btn-danger">Excluir</button>
+                                <button type="button" class="btn btn-warning" @click="editClick(item.id)">Editar</button>
+                                <button type="button" class="btn btn-danger" @click="deleteClick(item.id)">Excluir</button>
                             </div>
                         </td>
                     </tr>
@@ -39,7 +39,15 @@ export default defineComponent({
             required: true,
         },
         columns: {
-            type: Array,
+            type: Array as () => Array<{ field: string; label: string }>,
+            required: true,
+        },
+        deleteClick: {
+            type: Function,
+            required: true,
+        },
+        editClick: {
+            type: Function,
             required: true,
         },
     },

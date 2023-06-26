@@ -19,20 +19,19 @@
         </form>
         <div class="botoes">
             <button type="button" class="btn btn-danger but" @click="voltar">Voltar</button>
-            <button type="button" class="btn btn-success but" @click="enviarCadastro">Enviar</button>
+            <button type="button" class="btn btn-success but" @click="enviarDados">Enviar</button>
         </div>
     </div>
     <Footer />
 </template>
   
 <script lang="ts">
-import Form from '@/components/Form.vue';
 import Header from '@/components/Header.vue';
 import Footer from '@/components/Footer.vue'
 import { defineComponent } from 'vue';
 import { useRouter } from 'vue-router';
 import { CondutorModel } from '@/model/CondutorModel';
-import condutorClient from '@/client/condutor.client';
+import CondutorClient from '@/client/condutor.client';
 
 export default defineComponent({
     name: 'MovimentacaoFormView',
@@ -43,7 +42,6 @@ export default defineComponent({
     },
     components: {
         Header,
-        Form,
         Footer,
     },
     computed: {
@@ -61,15 +59,40 @@ export default defineComponent({
         voltar() {
             this.$router.go(-1);
         },
-        enviarCadastro() {
-            condutorClient.cadastrar(this.lista)
-                .then((success) => {
-                    this.lista = new CondutorModel();
-                    console.log(success);
-                    this.$router.go(-1);
-                }).catch((error) => {
-                    console.log(error);
+        enviarDados() {
+            console.log('ID:', this.lista.id);
+            console.log('Lista:', this.lista);
+            if (this.lista.id) {
+                CondutorClient.editar(this.lista.id, this.lista)
+                    .then(() => {
+                        this.$router.push({ name: 'condutor-lista' });
+                    })
+                    .catch((error) => {
+                        console.log(error.data);
+                    });
+            } else {
+                CondutorClient.cadastrar(this.lista)
+                    .then((success) => {
+                        this.lista = new CondutorModel();
+                        console.log(success);
+                        this.$router.go(-1);
+                    }).catch((error) => {
+                        console.log(error);
+                    })
+            }
+        }
+    },
+    created() {
+        const id = Number(this.$route.params.id);
+
+        if (!isNaN(id)) {
+            CondutorClient.findById(id)
+                .then((e) => {
+                    this.lista = e;
                 })
+                .catch((error) => {
+                    console.log(error);
+                });
         }
     }
 })

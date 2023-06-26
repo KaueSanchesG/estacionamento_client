@@ -12,14 +12,13 @@
         </form>
         <div class="botoes">
             <button type="button" class="btn btn-danger but" @click="voltar">Voltar</button>
-            <button type="button" class="btn btn-success but" @click="enviarCadastro">Enviar</button>
+            <button type="button" class="btn btn-success but" @click="enviarDados">Enviar</button>
         </div>
     </div>
     <Footer />
 </template>
   
 <script lang="ts">
-import Form from '@/components/Form.vue';
 import Header from '@/components/Header.vue';
 import Footer from '@/components/Footer.vue'
 import { defineComponent } from 'vue';
@@ -28,7 +27,6 @@ import { MarcaModel } from '@/model/MarcaModel';
 import { useRouter } from 'vue-router';
 
 export default defineComponent({
-    name: 'MovimentacaoFormView',
     data() {
         return {
             lista: new MarcaModel(),
@@ -36,7 +34,6 @@ export default defineComponent({
     },
     components: {
         Header,
-        Form,
         Footer,
     },
     computed: {
@@ -54,15 +51,40 @@ export default defineComponent({
         voltar() {
             this.$router.go(-1);
         },
-        enviarCadastro() {
-            MarcaClient.cadastrar(this.lista)
-                .then((success) => {
-                    this.lista = new MarcaModel();
-                    console.log(success);
-                    this.$router.go(-1);
-                }).catch((error) => {
-                    console.log(error);
+        enviarDados() {
+            console.log('ID:', this.lista.id);
+            console.log('Lista:', this.lista);
+            if (this.lista.id) {
+                MarcaClient.editar(this.lista.id, this.lista)
+                    .then(() => {
+                        this.$router.push({ name: 'marca-lista' });
+                    })
+                    .catch((error) => {
+                        console.log(error.data);
+                    });
+            } else {
+                MarcaClient.cadastrar(this.lista)
+                    .then((success) => {
+                        this.lista = new MarcaModel();
+                        console.log(success);
+                        this.$router.go(-1);
+                    }).catch((error) => {
+                        console.log(error);
+                    })
+            }
+        }
+    },
+    created() {
+        const id = Number(this.$route.params.id);
+
+        if (!isNaN(id)) {
+            MarcaClient.findById(id)
+                .then((e) => {
+                    this.lista = e;
                 })
+                .catch((error) => {
+                    console.log(error);
+                });
         }
     }
 })

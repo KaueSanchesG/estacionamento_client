@@ -3,7 +3,7 @@
         <div class="img_background_view"></div>
         <Header />
         <Select />
-        <Table :items="movimentacaoList" :columns="tableColumns" />
+        <Table :items="movimentacaoList" :columns="tableColumns" :deleteClick="deleteItem" :editClick="editItem" />
         <Footer />
     </div>
 </template>
@@ -53,6 +53,20 @@ export default defineComponent({
                     console.log(error);
                 });
         },
+        deleteItem(id: number) {
+            if (confirm('Tem certeza de que deseja excluir esta marca?')) {
+                MovimentacaoClient.excluir(id)
+                    .then((sucess) => {
+                        this.findAll();
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            }
+        },
+        editItem(id: number) {
+            this.$router.push({ name: 'movimentacao-formulario-editar', params: { id: id } });
+        }
     },
 })
 </script>

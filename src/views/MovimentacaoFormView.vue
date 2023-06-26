@@ -32,14 +32,13 @@
         </form>
         <div class="botoes">
             <button type="button" class="btn btn-danger but" @click="voltar">Voltar</button>
-            <button type="button" class="btn btn-success but" @click="enviarCadastro">Enviar</button>
+            <button type="button" class="btn btn-success but" @click="enviarDados">Enviar</button>
         </div>
     </div>
     <Footer />
 </template>
   
 <script lang="ts">
-import Form from '@/components/Form.vue';
 import Header from '@/components/Header.vue';
 import Footer from '@/components/Footer.vue'
 import { defineComponent } from 'vue';
@@ -47,12 +46,11 @@ import { useRouter } from 'vue-router';
 import { MovimentacaoModel } from '@/model/MovimentacaoModel';
 import { CondutorModel } from '@/model/CondutorModel';
 import { VeiculoModel } from '@/model/VeiculoModel';
-import movimentacaoClient from '@/client/movimentacao.client';
+import MovimentacaoClient from '@/client/movimentacao.client';
 import condutorClient from '@/client/condutor.client';
 import veiculoClient from '@/client/veiculo.client';
 
 export default defineComponent({
-    name: 'MovimentacaoFormView',
     data() {
         return {
             lista: new MovimentacaoModel(),
@@ -66,7 +64,6 @@ export default defineComponent({
     },
     components: {
         Header,
-        Form,
         Footer,
     },
     computed: {
@@ -102,15 +99,40 @@ export default defineComponent({
                     console.log(error);
                 })
         },
-        enviarCadastro() {
-            movimentacaoClient.cadastrar(this.lista)
-                .then((success) => {
-                    this.lista = new MovimentacaoModel();
-                    console.log(success);
-                    this.$router.go(-1);
-                }).catch((error) => {
-                    console.log(error);
+        enviarDados() {
+            console.log('ID:', this.lista.id);
+            console.log('Lista:', this.lista);
+            if (this.lista.id) {
+                MovimentacaoClient.editar(this.lista.id, this.lista)
+                    .then(() => {
+                        this.$router.push({ name: 'movimentacao-lista' });
+                    })
+                    .catch((error) => {
+                        console.log(error.data);
+                    });
+            } else {
+                MovimentacaoClient.cadastrar(this.lista)
+                    .then((success) => {
+                        this.lista = new MovimentacaoModel();
+                        console.log(success);
+                        this.$router.go(-1);
+                    }).catch((error) => {
+                        console.log(error);
+                    })
+            }
+        }
+    },
+    created() {
+        const id = Number(this.$route.params.id);
+
+        if (!isNaN(id)) {
+            MovimentacaoClient.findById(id)
+                .then((e) => {
+                    this.lista = e;
                 })
+                .catch((error) => {
+                    console.log(error);
+                });
         }
     }
 })
@@ -181,7 +203,7 @@ export default defineComponent({
     align-self: center;
 }
 
-.sc l {
+.slc {
     text-transform: lowercase;
     width: 100%;
 }

@@ -3,7 +3,7 @@
         <div class="img_background_view"></div>
         <Header />
         <Select />
-        <Table :items="veiculoList" :columns="tableColumns" />
+        <Table :items="veiculoList" :columns="tableColumns" :deleteClick="deleteItem" :editClick="editItem" />
         <Footer />
     </div>
 </template>
@@ -16,6 +16,8 @@ import Footer from '../../components/Footer.vue';
 import { defineComponent } from 'vue';
 import VeiculoClient from '@/client/veiculo.client';
 import { VeiculoModel } from '@/model/VeiculoModel';
+import modeloClient from '@/client/modelo.client';
+import veiculoClient from '@/client/veiculo.client';
 
 export default defineComponent({
     name: 'VeiculoListaView',
@@ -52,6 +54,20 @@ export default defineComponent({
                     console.log(error);
                 });
         },
+        deleteItem(id: number) {
+            if (confirm('Tem certeza de que deseja excluir esta marca?')) {
+                veiculoClient.excluir(id)
+                    .then((sucess) => {
+                        this.findAll();
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            }
+        },
+        editItem(id: number) {
+            this.$router.push({ name: 'veiculo-formulario-editar', params: { id: id } });
+        }
     },
 })
 </script>

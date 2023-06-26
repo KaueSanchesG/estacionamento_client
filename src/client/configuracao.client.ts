@@ -15,7 +15,7 @@ class ConfiguracaoClient {
 
   public async findById(id: number): Promise<ConfiguracaoModel> {
     try {
-      return (await this.axiosClient.get<ConfiguracaoModel>(`?id=${id}`)).data;
+      return (await this.axiosClient.get<ConfiguracaoModel>(`/${id}`)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
@@ -29,10 +29,9 @@ class ConfiguracaoClient {
     }
   }
 
-  public async atualizar(configuracao: ConfiguracaoModel): Promise<void> {
+  public async editar(id: number, marca: ConfiguracaoModel): Promise<string> {
     try {
-      return (await this.axiosClient.put(`/${configuracao.id}`, configuracao))
-        .data;
+      return (await this.axiosClient.put<string>(`/${id}`, marca)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }

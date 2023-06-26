@@ -24,53 +24,88 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/movimentacao/lista",
-    name: "movimentacaolista",
+    name: "movimentacao-lista",
     component: MovimentacaoView,
   },
   {
     path: "/movimentacao/formulario",
-    name: "movimentacaoformulario",
+    name: "movimentacao-formulario",
     component: MovimentacaoFormView,
+    children: [
+      {
+        path: "/movimentacao/formulario/:id",
+        name: "movimentacao-formulario-editar",
+        component: MovimentacaoFormView,
+      },
+    ],
   },
   {
     path: "/condutor/lista",
-    name: "condutorlista",
+    name: "condutor-lista",
     component: CondutorListaView,
   },
   {
     path: "/condutor/formulario",
-    name: "condutorformulario",
+    name: "condutor-formulario",
     component: CondutorFormView,
+    children: [
+      {
+        path: "/condutor/formulario/:id",
+        name: "condutor-formulario-editar",
+        component: CondutorFormView,
+      },
+    ],
   },
   {
     path: "/veiculo/lista",
-    name: "veiculolista",
+    name: "veiculo-lista",
     component: VeiculoListaView,
   },
   {
     path: "/veiculo/formulario",
-    name: "veiculoformulario",
+    name: "veiculo-formulario",
     component: VeiculoFormView,
+    children: [
+      {
+        path: "/veiculo/formulario/:id",
+        name: "veiculo-formulario-editar",
+        component: VeiculoFormView,
+      },
+    ],
   },
   {
     path: "/modelo/lista",
-    name: "modelolista",
+    name: "modelo-lista",
     component: ModeloListaView,
   },
   {
     path: "/modelo/formulario",
-    name: "modeloformulario",
+    name: "modelo-formulario",
     component: ModeloFormView,
+    children: [
+      {
+        path: "/modelo/formulario/:id",
+        name: "modelo-formulario-editar",
+        component: ModeloFormView,
+      },
+    ],
   },
   {
     path: "/marca/lista",
-    name: "marcalista",
+    name: "marca-lista",
     component: MarcaListaView,
   },
   {
     path: "/marca/formulario",
-    name: "marcaformulario",
+    name: "marca-formulario",
     component: MarcaFormView,
+    children: [
+      {
+        path: "/marca/formulario/:id",
+        name: "marca-formulario-editar",
+        component: MarcaFormView,
+      },
+    ],
   },
 ];
 

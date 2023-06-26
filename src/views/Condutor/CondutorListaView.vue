@@ -3,7 +3,7 @@
         <div class="img_background_view"></div>
         <Header />
         <Select />
-        <Table :items="condutorList" :columns="tableColumns" />
+        <Table :items="condutorList" :columns="tableColumns" :deleteClick="deleteItem" :editClick="editItem" />
         <Footer />
     </div>
 </template>
@@ -53,6 +53,20 @@ export default defineComponent({
                     console.log(error);
                 });
         },
+        deleteItem(id: number) {
+            if (confirm('Tem certeza de que deseja excluir esta marca?')) {
+                CondutorClient.excluir(id)
+                    .then((sucess) => {
+                        this.findAll();
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            }
+        },
+        editItem(id: number) {
+            this.$router.push({ name: 'condutor-formulario-editar', params: { id: id } });
+        }
     },
 })
 </script>

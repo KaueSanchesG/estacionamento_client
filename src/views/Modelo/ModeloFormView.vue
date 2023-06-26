@@ -10,8 +10,8 @@
                     v-model="lista.nome">
             </div>
             <div class="temp">
-                <label for="select_marca" class="label">Marca</label>
-                <select name="select_marca" class="label estilo" v-model="lista.marca">
+                <label class="label">Marca</label>
+                <select class="label estilo" v-model="lista.marca">
                     <option :value="item" v-for="item in lista2" :key="item.id">
                         {{ item.nome }}
                     </option>
@@ -20,14 +20,13 @@
         </form>
         <div class="botoes">
             <button type="button" class="btn btn-danger but" @click="voltar">Voltar</button>
-            <button type="button" class="btn btn-success but" @click="enviarCadastro">Enviar</button>
+            <button type="button" class="btn btn-success but" @click="enviarDados">Enviar</button>
         </div>
     </div>
     <Footer />
 </template>
   
 <script lang="ts">
-import Form from '@/components/Form.vue';
 import Header from '@/components/Header.vue';
 import Footer from '@/components/Footer.vue'
 import { defineComponent } from 'vue';
@@ -50,7 +49,6 @@ export default defineComponent({
     },
     components: {
         Header,
-        Form,
         Footer,
     },
     computed: {
@@ -77,15 +75,40 @@ export default defineComponent({
                     console.log(error);
                 })
         },
-        enviarCadastro() {
-            ModeloClient.cadastrar(this.lista)
-                .then((success) => {
-                    this.lista = new ModeloModel();
-                    console.log(success);
-                    this.$router.go(-1);
-                }).catch((error) => {
-                    console.log(error);
+        enviarDados() {
+            console.log('ID:', this.lista.id);
+            console.log('Lista:', this.lista);
+            if (this.lista.id) {
+                ModeloClient.editar(this.lista.id, this.lista)
+                    .then(() => {
+                        this.$router.push({ name: 'modelo-lista' });
+                    })
+                    .catch((error) => {
+                        console.log(error.data);
+                    });
+            } else {
+                ModeloClient.cadastrar(this.lista)
+                    .then((success) => {
+                        this.lista = new ModeloModel();
+                        console.log(success);
+                        this.$router.go(-1);
+                    }).catch((error) => {
+                        console.log(error);
+                    })
+            }
+        }
+    },
+    created() {
+        const id = Number(this.$route.params.id);
+
+        if (!isNaN(id)) {
+            ModeloClient.findById(id)
+                .then((e) => {
+                    this.lista = e;
                 })
+                .catch((error) => {
+                    console.log(error);
+                });
         }
     }
 })
