@@ -40,7 +40,7 @@ export default defineComponent({
     },
     methods: {
         findAll() {
-            MarcaClient.listaAll()
+            MarcaClient.findAll()
                 .then((success: MarcaModel[]) => {
                     console.log(success);
                     this.marcaList = success;

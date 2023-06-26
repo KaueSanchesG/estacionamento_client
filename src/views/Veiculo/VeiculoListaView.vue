@@ -43,7 +43,7 @@ export default defineComponent({
     },
     methods: {
         findAll() {
-            VeiculoClient.listaAll()
+            VeiculoClient.findAll()
                 .then((success: VeiculoModel[]) => {
                     console.log(success);
                     this.veiculoList = success;

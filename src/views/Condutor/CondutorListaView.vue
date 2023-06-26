@@ -44,7 +44,7 @@ export default defineComponent({
     },
     methods: {
         findAll() {
-            CondutorClient.listaAll()
+            CondutorClient.findAll()
                 .then((success: CondutorModel[]) => {
                     console.log(success);
                     this.condutorList = success;

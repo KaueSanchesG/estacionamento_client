@@ -1,39 +1,33 @@
 <template>
   <div class="outterContainer">
-    <div
-      style="text-transform: uppercase; display: flex; justify-content: center; font-weight: bold; padding: 0.3vw 0; color: white; text-shadow: 1px 1px 3px white;">
+    <div class="nomeRota" style="">
       {{ nomeRota }}
     </div>
-    <form class="formContainer">
+    <form class="formContainer" @submit.prevent="submitForm">
       <div class="temp" v-for="(field, index) in fields" :key="index"
         :class="{ lastElement: index === fields.length - 1 }">
         <label class="label" :for="field.name">{{ field.label }}</label>
+
         <template v-if="field.type === 'input'">
-          <input class="estilo" :type="field.inputType" :name="field.name" />
+          <input class="estilo" :type="field.inputType" :name="field.name" v-model="field.value" />
         </template>
-        <template v-else-if="field.type === 'select'">
-          <select class="label estilo" :name="field.name">
-            <option v-for="(option, optionIndex) in field.options" class="estilo" :key="optionIndex">{{ option }}</option>
+
+        <template v-else-if="field.type === 'select' || field.type === 'enumSelect'">
+          <select class="label estilo" :name="field.name" v-model="field.value">
+            <option v-for="(option, optionIndex) in getFieldOptions(field)" :key="optionIndex">
+              {{ option.label }}
+            </option>
           </select>
         </template>
-        <template v-else-if="field.type === 'enumSelect'">
-          <select class="label estilo" :name="field.name">
-            <option v-for="(option, optionIndex) in field.enumOptions" class="estilo" :key="optionIndex"
-              :value="option.value">{{
-                option.label }}</option>
-          </select>
-        </template>
-        <template v-else-if="field.type === 'time'">
-          <input class="label estilo" type="time" :name="field.name" />
-        </template>
-        <template v-else-if="field.type === 'email'">
-          <input class="label estilo" type="email" :name="field.name" />
+
+        <template v-else-if="field.type === 'time' || field.type === 'email'">
+          <input class="label estilo" :type="field.type" :name="field.name" v-model="field.value" />
         </template>
       </div>
     </form>
     <div class="botoes">
       <button type="button" class="btn btn-danger slc" @click="voltar">Voltar</button>
-      <button type="submit" class="btn btn-success slc">Enviar</button>
+      <button type="button" class="btn btn-success slc" @click="submitForm">Enviar</button>
     </div>
   </div>
 </template>
@@ -45,7 +39,7 @@ import { useRouter } from 'vue-router';
 export default defineComponent({
   props: {
     fields: {
-      type: Array,
+      type: Array as () => { label: string; name: string; type: string; value: any; inputType?: string; options?: string[]; enumOptions?: { value: string; label: string }[] }[],
       required: true
     },
   },
@@ -58,11 +52,22 @@ export default defineComponent({
         return nomeRota + ' Cadastra';
       }
       return '';
-    },
+    }
   },
   methods: {
+    submitForm() {
+      this.$emit('submit');
+    },
     voltar() {
       this.$router.go(-1);
+    },
+    getFieldOptions(field: { options?: string[]; enumOptions?: { value: string; label: string }[] }): { value: string; label: string }[] {
+      if (field.options) {
+        return field.options.map((option) => ({ value: option, label: option }));
+      } else if (field.enumOptions) {
+        return field.enumOptions;
+      }
+      return [];
     },
   }
 });

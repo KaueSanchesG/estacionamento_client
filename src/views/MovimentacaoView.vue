@@ -44,7 +44,7 @@ export default defineComponent({
     },
     methods: {
         findAll() {
-            MovimentacaoClient.listaAll()
+            MovimentacaoClient.findAll()
                 .then((success: MovimentacaoModel[]) => {
                     console.log(success);
                     this.movimentacaoList = success;

@@ -1,51 +1,63 @@
-import { VeiculoModel } from "@/model/VeiculoModel";
-import axios, { AxiosInstance } from "axios";
+import axios, { AxiosInstance, AxiosResponse } from "axios";
+import { VeiculoModel } from "./../model/VeiculoModel";
+import { CorModel } from "@/model/Enums/CorModel";
+import { TipoModel } from "@/model/Enums/TipoModel";
 
-export class VeiculoClient {
+class VeiculoClient {
   private axiosClient: AxiosInstance;
 
   constructor() {
     this.axiosClient = axios.create({
       baseURL: "http://localhost:8080/api/veiculo",
       headers: {
-        "Content-Type": "application/json",
+        "Content-type": "application/json",
       },
     });
   }
+
   public async findById(id: number): Promise<VeiculoModel> {
     try {
-      return (await this.axiosClient.get<VeiculoModel>(`/${id}`)).data;
+      return (await this.axiosClient.get<VeiculoModel>(`?id=${id}`)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
   }
-  public async listaAll(): Promise<VeiculoModel[]> {
+
+  public async findAll(): Promise<VeiculoModel[]> {
     try {
       return (await this.axiosClient.get<VeiculoModel[]>(`/lista`)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
   }
-  public async cadastrar(veiculo: VeiculoModel): Promise<void> {
+
+  public async cadastrar(veiculo: VeiculoModel): Promise<string> {
     try {
-      return await this.axiosClient.post("/", veiculo);
+      return (await this.axiosClient.post<string>(``, veiculo)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
   }
-  public async editar(veiculo: VeiculoModel): Promise<void> {
+
+  public async atualizar(veiculo: VeiculoModel): Promise<void> {
     try {
       return (await this.axiosClient.put(`/${veiculo.id}`, veiculo)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
   }
-  public async delete(id: number): Promise<string> {
+
+  public async excluir(id: number): Promise<string> {
     try {
-      return (await this.axiosClient.delete<string>(`/${id}`)).data;
+      const response: AxiosResponse<string> = await this.axiosClient.delete(
+        ``,
+        { params: { id } }
+      );
+      return response.data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
   }
 }
+
 export default new VeiculoClient();

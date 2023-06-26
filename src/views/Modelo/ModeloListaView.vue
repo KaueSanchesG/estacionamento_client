@@ -41,7 +41,7 @@ export default defineComponent({
     },
     methods: {
         findAll() {
-            ModeloClient.listaAll()
+            ModeloClient.findAll()
                 .then((success: ModeloModel[]) => {
                     console.log(success);
                     this.modeloList = success;
