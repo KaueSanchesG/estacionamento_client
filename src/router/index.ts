@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import ReciboView from "../views/ReciboView.vue";
+import ConfiguracaoFormView from "../views/ConfiguracaoFormView.vue";
 import MovimentacaoView from "../views/MovimentacaoView.vue";
 import CondutorListaView from "../views/Condutor/CondutorListaView.vue";
 import VeiculoListaView from "../views/Veiculo/VeiculoListaView.vue";
@@ -18,9 +18,16 @@ const routes: Array<RouteRecordRaw> = [
     redirect: "/movimentacao/lista",
   },
   {
-    path: "/recibo",
-    name: "recibo",
-    component: ReciboView,
+    path: "/configuracao/formulario",
+    name: "configuracao-formulario",
+    component: ConfiguracaoFormView,
+    children: [
+      {
+        path: "/configuracao/formulario/:id",
+        name: "configuracao-formulario-editar",
+        component: ConfiguracaoFormView,
+      },
+    ],
   },
   {
     path: "/movimentacao/lista",

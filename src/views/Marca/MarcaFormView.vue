@@ -52,8 +52,6 @@ export default defineComponent({
             this.$router.go(-1);
         },
         enviarDados() {
-            console.log('ID:', this.lista.id);
-            console.log('Lista:', this.lista);
             if (this.lista.id) {
                 MarcaClient.editar(this.lista.id, this.lista)
                     .then(() => {

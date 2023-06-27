@@ -30,6 +30,7 @@ export default defineComponent({
                 { label: 'Veículo', value: 'option3', route: '/veiculo/lista' },
                 { label: 'Modelo', value: 'option4', route: '/modelo/lista' },
                 { label: 'Marca', value: 'option5', route: '/marca/lista' },
+                { label: 'Configuração', value: 'option6', route: '/configuracao/formulario' },
             ],
             isActive: false,
         };

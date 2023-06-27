@@ -4,7 +4,7 @@ export class ConfiguracaoModel extends AbstractEntityModel {
   valorHora!: number;
   valorMinutoMulta!: number;
   inicioExpediente!: Date;
-  fimExpeiente!: Date;
+  fimExpediente!: Date;
   tempoParaDesconto!: number;
   tempoDeDesconto!: number;
   gerarDesconto!: boolean;
