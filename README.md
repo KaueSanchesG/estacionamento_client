@@ -5,7 +5,7 @@
 ![Gif-3](https://github.com/KaueSanchesG/estacionamento_client/assets/95658722/e55aaed2-5e84-4a2e-a901-6152fe5ce77d)
 
 
-This project is divided into 2 parts: the front end(this repository) and the [back end](https://github.com/KaueSanchesG/Estacionamento_API) . In short, it's a parking lot application made with Spring Boot in the back end and Vue.js as the front-end framework. The main goal was to create a REST API so the client could interact with it and extract data in the same way.
+This project is divided into 2 parts: the front end (this repository) and the [back end](https://github.com/KaueSanchesG/Estacionamento_API) . In short, it's a parking lot application made with Spring Boot in the back end and Vue.js as the front-end framework. The main goal was to create a REST API so the client could interact with it and extract data in the same way.
 
 ## Status ✅
 
@@ -45,7 +45,7 @@ For stop running, just ctrl+c
 |      Technology      | Version |
 |:--------------------:|:-------:|
 |       bootstrap      |  5.3.0  |
-|        core-js       |  3.8.3  |
+|         sass         |  1.32.7 |
 |          Vue         |  3.2.13 |
 |         axios        |  1.4.0  |
 |      typescript      |  4.5.5  |
